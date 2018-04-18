@@ -11,7 +11,7 @@
   <form>
     <input type="text" name="username"id="name" placeholder="username">
     <input type="Number" name="age" id="number" placeholder="age">
-    <button id="btn" type="button">ok</button>
+    <button id="btn" type="button">Add Users</button>
 
   </form>
 
@@ -26,8 +26,7 @@
       success: function (data) {  
         var elem = "";
         for (var i = 0; i < data.length; i++) {
-          alert(data.length);
-          elem += '<li>username  ' + data[i].username + 'age   ' + data[i].age + '</li>';
+          elem += '<li>' + data[i].username + data[i].age + '</li>';
         }
         $('#g').append(elem);
       },
@@ -54,7 +53,7 @@
             
           }),
           success: function (data) {
-            var elem = '<li>username  ' + data.username + 'age' + data.age + '</li>';
+            var elem = '<li>' + data.username+data.age + '</li>';
              $('#g').append(elem);
           },
 
