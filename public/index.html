@@ -1,0 +1,76 @@
+<html>
+
+<head>
+  <title>Express</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+  <ul id="g">
+  </ul>
+  <form>
+    <input type="text" name="username"id="name" placeholder="username">
+    <input type="Number" name="age" id="number" placeholder="age">
+    <button id="btn" type="button">ok</button>
+
+  </form>
+
+
+  <script src="/javascripts/jquery.min.js"></script>
+
+  <script>
+    $.ajax({
+      url: "/users",
+      type: "get",
+      contentType: "text/html",
+      success: function (data) {  
+        alert(data);
+        var elem = "";
+        for (var i = 0; i < data.length; i++) {
+          alert(data.length);
+          elem += '<li>username  ' + data[i].username + 'age   ' + data[i].age + '</li>';
+        }
+        $('#g').append(elem);
+      },
+
+      error: function () {
+        alert("error");
+      }
+
+
+    });
+
+   
+      $("body").on("click", "#btn", function () {
+        debugger;
+        var name=$('#name').val();
+        var age=$('#number').val();
+        
+        $.ajax({
+          url: "/users/add",
+          method: "post",
+          contentType: "application/json",
+          data:JSON.stringify({
+            username:name,
+            age:age
+            
+          }),
+          success: function (data) {
+            var elem = '<li>username  ' + data.username + 'age' + data.age + '</li>';
+
+          },
+
+          error: function () {
+            alert("error");
+          }
+
+
+        });
+
+
+      });
+  
+  </script>
+</body>
+
+</html>
