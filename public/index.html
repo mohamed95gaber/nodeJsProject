@@ -24,7 +24,6 @@
       type: "get",
       contentType: "text/html",
       success: function (data) {  
-        alert(data);
         var elem = "";
         for (var i = 0; i < data.length; i++) {
           alert(data.length);
@@ -42,7 +41,6 @@
 
    
       $("body").on("click", "#btn", function () {
-        debugger;
         var name=$('#name').val();
         var age=$('#number').val();
         
@@ -57,7 +55,7 @@
           }),
           success: function (data) {
             var elem = '<li>username  ' + data.username + 'age' + data.age + '</li>';
-
+             $('#g').append(elem);
           },
 
           error: function () {
