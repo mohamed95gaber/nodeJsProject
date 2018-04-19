@@ -26,7 +26,8 @@
       success: function (data) {  
         var elem = "";
         for (var i = 0; i < data.length; i++) {
-          elem += '<li>' + data[i].username+'  -  ' + data[i].age + '</li>';
+          elem += '<li id='+data[i]._id+'>' + data[i].username+'  -  ' + data[i].age + '<button type="button" class="dbtn" data-id='+data[i]._id+'>Delete User</button></li>';
+         //elem += '<li>' + data[i].username+'  -  ' + data[i].age + '<button type="button" class="dbtn" data-id='+data._id+'></button></li>';
         }
         $('#g').append(elem);
       },
@@ -53,7 +54,7 @@
             
           }),
           success: function (data) {
-            var elem = '<li>' + data.username+'  -  '+data.age + '</li>';
+          elem = '<li id='+data._id+'>' + data.username+'  -  ' + data.age + '<button type="button" class="dbtn" data-id='+data._id+'>Delete User</button></li>';
              $('#g').append(elem);
           },
 
@@ -66,6 +67,35 @@
 
 
       });
+    
+      $("body").on("click", ".dbtn", function () {
+        var _id=$(this).attr('data-id');
+        console.log(_id);
+        $.ajax({
+          url: "/users/delete/"+_id,
+          method: "delete",
+          contentType: "application/json",
+         success:function(data)
+         {
+           if (data) {
+               $("li#"+_id).remove();
+              }
+        else {
+            alert("Error");
+           }
+    },
+
+    error: function ()
+    {
+            alert("error");
+     }
+
+        });
+
+
+      });
+    
+
   
   </script>
 </body>
